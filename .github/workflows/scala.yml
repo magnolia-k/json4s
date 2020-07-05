@@ -12,23 +12,23 @@ jobs:
 
     runs-on: ubuntu-latest
 
-  steps:
-    - uses: actions/checkout@v2
-    - name: Cache
-      uses: actions/cache@v2
-      with:
-        path: |
-          ~/.ivy2/cache
-          ~/.sbt
-          ~/.coursier
-        key: build-${{ runner.os }}-scala-2.13-${{ hashFiles('**/*.sbt') }}
-        restore-keys: ${{ runner.os }}-scala-2.13-
-    - name: Set up JDK
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-    - name: Run tests
-      run: sbt ++2.13.3 test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.ivy2/cache
+            ~/.sbt
+            ~/.coursier
+          key: build-${{ runner.os }}-scala-2.13-${{ hashFiles('**/*.sbt') }}
+          restore-keys: ${{ runner.os }}-scala-2.13-
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Run tests
+        run: sbt ++2.13.3 test
 
   test_2_12:
     name: Scala 2.12
