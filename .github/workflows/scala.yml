@@ -11,27 +11,22 @@ jobs:
     name: Scala 2.13
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        Java: [8, 11]
 
-    steps:
+  steps:
     - uses: actions/checkout@v2
     - name: Cache
       uses: actions/cache@v2
-      env:
-        cache-name: cache-sbt-libs
       with:
         path: |
           ~/.ivy2/cache
           ~/.sbt
           ~/.coursier
-        key: build-${{ runner.os }}-${{ cache-sbt-libs }}-scala-2.13-${{ hashFiles('build.sbt') }}
-        restore-keys: ${{ runner.os }}-${{ cache-sbt-libs }}-scala-2.13-
+        key: build-${{ runner.os }}-scala-2.13-${{ hashFiles('**/*.sbt') }}
+        restore-keys: ${{ runner.os }}-scala-2.13-
     - name: Set up JDK
       uses: actions/setup-java@v1
       with:
-        java-version: ${{ matrix.java }}
+        java-version: 11
     - name: Run tests
       run: sbt ++2.13.3 test
 
@@ -39,26 +34,20 @@ jobs:
     name: Scala 2.12
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        Java: [8, 11]
-
     steps:
     - uses: actions/checkout@v2
     - name: Cache
       uses: actions/cache@v2
-      env:
-        cache-name: cache-sbt-libs
       with:
         path: |
           ~/.ivy2/cache
           ~/.sbt
           ~/.coursier
-        key: build-${{ runner.os }}-${{ cache-sbt-libs }}-scala-2.12-${{ hashFiles('build.sbt') }}
-        restore-keys: ${{ runner.os }}-${{ cache-sbt-libs }}-scala-2.12-
+        key: build-${{ runner.os }}-scala-2.12-${{ hashFiles('**/*.sbt') }}
+        restore-keys: ${{ runner.os }}-scala-2.12-
     - name: Set up JDK
       uses: actions/setup-java@v1
       with:
-        java-version: ${{ matrix.java }}
+        java-version: 8
     - name: Run tests
       run: sbt ++2.12.11 test
