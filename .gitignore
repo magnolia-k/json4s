@@ -66,3 +66,7 @@ target
 .projectile
 .lib
 atlassian-ide-plugin.xml
+
+.bloop/
+.bsp/
+.metals/

@@ -114,3 +114,6 @@ lazy val json4sTests = Project(
       |import reflect._
     """.stripMargin,
 ) dependsOn(core, xml, native, json4sExt, scalazExt, jacksonSupport, mongo)
+
+Test / testForkedParallel := true
+
